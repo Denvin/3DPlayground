@@ -47,9 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a474e307c806c43892ac263704572e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
   minYValue: 0.65
   maxYValue: 2.5
-  moveTime: 1
+  moveTimeUp: 1
+  moveTimeDown: 0.1
+  waitTime: 2
   duration: 2
   strength: 0.1
   randomnes: 10

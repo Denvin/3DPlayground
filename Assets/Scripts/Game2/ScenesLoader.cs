@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesLoader : MonoBehaviour
 {
+    #region SingleTon
     public static ScenesLoader Instance { get; private set; }
 
     private void Awake()
@@ -18,16 +19,31 @@ public class ScenesLoader : MonoBehaviour
             Instance = this;
         }
     }
-    public void RestartLevel(float delay)
+    #endregion
+
+    [SerializeField] float delay;
+    public void RestartLevel()
     {
-        StartCoroutine(RestartLevelCoroutine(delay));
+        StartCoroutine(RestartLevelCoroutine());
+    }
+
+    public void LoadNextLevel()
+    {
+        StartCoroutine(LoadNextLevelCoroutine());
     }
     
-    IEnumerator RestartLevelCoroutine(float delay)
+    IEnumerator RestartLevelCoroutine()
     {
         yield return new WaitForSeconds(delay);
 
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
+    }
+
+    IEnumerator LoadNextLevelCoroutine()
+    {
+        yield return new WaitForSeconds(delay);
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene + 1);
     }
 }

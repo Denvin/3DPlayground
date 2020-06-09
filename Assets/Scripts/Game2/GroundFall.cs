@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class GroundFall : MonoBehaviour
 {
@@ -14,8 +15,14 @@ public class GroundFall : MonoBehaviour
 
     private CubeMovement cube;
 
+    private Collider collider;
 
 
+
+    private void Start()
+    {
+        collider = GetComponent<Collider>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         cube = other.GetComponent<CubeMovement>();
@@ -34,9 +41,11 @@ public class GroundFall : MonoBehaviour
 
         movementSequence
             .AppendInterval(waitTime)
-            .AppendCallback(CheckCube)            
+            .AppendCallback(CheckCube)
+            .AppendCallback(() => ColliderOnOff(false))
             .Append(transform.DOMoveY(minYValue, moveTime).SetEase(Ease.InExpo))
             .AppendInterval(waitTime * 4)
+            .AppendCallback(() => ColliderOnOff(true))
             .Append(transform.DOMoveY(maxYValue, moveTime));
 
     }
@@ -48,6 +57,10 @@ public class GroundFall : MonoBehaviour
         {
             exitCube = true;
         }
+    }
+    private void ColliderOnOff(bool collider)
+    {
+        this.collider.enabled = collider;
     }
 
     private void CheckCube()

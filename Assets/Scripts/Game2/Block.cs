@@ -6,38 +6,47 @@ using UnityEngine.UI;
 
 public class Block : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] ButtonOfBlock button;
+
+    [Header("Movement")]
     [SerializeField] float minYValue = 0.65f;
     [SerializeField] float maxYValue = 2.5f;
-    [SerializeField] float moveTime = 1f;
+    [SerializeField] float moveTimeUp = 1f;
+    [SerializeField] float moveTimeDown = 1f;
+    [SerializeField] float waitTime = 2f;
+
+    [Header("Shake effect")]
     [SerializeField] float duration = 2f;
     [SerializeField] float strength=  0.1f;
     [SerializeField] float randomnes = 10f;
     [SerializeField] int vibrato = 30;
 
-    float waitTime;
-    
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        ButtonOfBlock button = FindObjectOfType<ButtonOfBlock>();
-        button.onPressedChanged += MoveBlock;
-        waitTime = button.WaitTime;
-        
-        
+
+
+        button.onPressed += MoveUpBlock;
+        button.onPressedRelease += MoveDownBlock;
+               
     }
 
-    public void MoveBlock()
+    public void MoveUpBlock()
     {
-       
         Sequence movementSequence = DOTween.Sequence();
-
-        movementSequence.Append(transform.DOMoveY(maxYValue, moveTime))
-            .AppendInterval(waitTime)
+        movementSequence.Append(transform.DOMoveY(maxYValue, moveTimeUp));                  
+    }
+    public void MoveDownBlock()
+    {
+        Sequence movementSequence = DOTween.Sequence();
+        movementSequence.AppendInterval(waitTime)
             .Append(transform.DOShakePosition(duration, strength, vibrato, randomnes))
-            .Append(transform.DOMoveY(minYValue, moveTime));
-
+            .Append(transform.DOMoveY(minYValue, moveTimeDown));
     }
 
     private void OnTriggerEnter(Collider other)

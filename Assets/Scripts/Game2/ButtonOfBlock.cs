@@ -6,12 +6,16 @@ using DG.Tweening;
 
 public class ButtonOfBlock : MonoBehaviour
 {
-    public Action onPressedChanged = delegate { };
+    
+    public Action onPressed = delegate { };
+    public Action onPressedRelease = delegate { };
 
     [SerializeField] float minYValue = -0.12f;
     [SerializeField] float maxYValue = 0f;
     [SerializeField] float moveTime = 1;
     [SerializeField] float waitTime = 1;
+
+    Sequence movementSequence;
 
     public float WaitTime
     {
@@ -29,11 +33,15 @@ public class ButtonOfBlock : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onPressedChanged();
+        onPressed();
         Sequence movementSequence = DOTween.Sequence();
-
-        movementSequence.Append(transform.DOMoveY(minYValue, moveTime))
-            .AppendInterval(waitTime)
-            .Append(transform.DOMoveY(maxYValue, moveTime));
+        movementSequence.Append(transform.DOMoveY(minYValue, moveTime));
+            
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        onPressedRelease();
+        Sequence movementSequence = DOTween.Sequence();
+        movementSequence.Append(transform.DOMoveY(maxYValue, moveTime));
     }
 }
