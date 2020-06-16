@@ -7,15 +7,21 @@ using JetBrains.Annotations;
 public class CubeMovement : MonoBehaviour
 {
     public GameObject destroyFX;
+    public GameObject portalFX;
 
     [SerializeField] float moveTime = 0.5f;
     [SerializeField] float jumpPower = 1f;
+    [SerializeField] float timeTeleport = 1f;
 
     [Header("Sounds")]
     [SerializeField] AudioClip deathSound;
 
+
+
     bool allowInput;
 
+    
+    
     public void Die()
     {
         Vector3 fxPosition = transform.position;
@@ -34,6 +40,7 @@ public class CubeMovement : MonoBehaviour
     void Start()
     {
         allowInput = true;
+
     }
 
     // Update is called once per frame
@@ -94,10 +101,21 @@ public class CubeMovement : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
-        
 
-        Invoke("Die", 2f);
-        //Die();
+
+        StartCoroutine(FallCoroutine());
+    }
+
+    /*public void Teleport(Vector3 endPosition)
+    {
+        Vector3 nextPosition = new Vector3(0,2,0) + transform.position;
+        Sequence movementSequance = DOTween.Sequence();
+        movementSequance.Append(transform.DOMove(nextPosition, timeTeleport))
+            .Append(transform.DOMove(endPosition, timeTeleport)); 
+    }*/
+    public void Teleport(Vector3 endPosition)
+    {
+        StartCoroutine(TeleportCoroutine(endPosition));
     }
     void MoveTo(Vector3 newPosition)
     {
@@ -116,4 +134,20 @@ public class CubeMovement : MonoBehaviour
         allowInput = true;
     }
 
+    IEnumerator TeleportCoroutine(Vector3 endPosition)
+    {
+        Vector3 fxPosition = transform.position;
+        if (portalFX != null)
+        {
+            Instantiate(portalFX, transform.position, Quaternion.identity);
+        }
+        yield return new WaitForSeconds(timeTeleport);
+        transform.position = endPosition;
+    }
+
+    IEnumerator FallCoroutine()
+    {   
+        yield return new WaitForSeconds(1.5f);
+        Die();
+    }
 }

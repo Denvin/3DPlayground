@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 2816243142613857402}
-  effects: {fileID: 2816243142469699296}
+  effect: {fileID: 2816243142469699296}
 --- !u!1 &2816243142469699298
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2816243142613857405}
+  - component: {fileID: 7309151996699408372}
   - component: {fileID: 2816243142613857402}
   m_Layer: 0
   m_Name: MusicSource
@@ -205,6 +206,23 @@ Transform:
   m_Father: {fileID: 2816243142365625745}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7309151996699408372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2816243142613857404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b6634ff6ccaf54b973772c3502be90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMusic:
+  - {fileID: 8300000, guid: 475f4837af487ce4a9e68bb227455e4c, type: 3}
+  - {fileID: 8300000, guid: 90eae78e8ce85a849b5b0ca11b2de641, type: 3}
+  - {fileID: 8300000, guid: 47f45ef7b5767674393cc401fc325705, type: 3}
+  - {fileID: 8300000, guid: 1532c7e67c2d60c4c8780da14b7e8fcf, type: 3}
 --- !u!82 &2816243142613857402
 AudioSource:
   m_ObjectHideFlags: 0
@@ -215,9 +233,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1532c7e67c2d60c4c8780da14b7e8fcf, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0

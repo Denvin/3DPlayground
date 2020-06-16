@@ -31,6 +31,11 @@ public class ScenesLoader : MonoBehaviour
     {
         StartCoroutine(LoadNextLevelCoroutine());
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
     
     IEnumerator RestartLevelCoroutine()
     {
