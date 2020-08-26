@@ -11,6 +11,7 @@ public class Bridge : MonoBehaviour
     [Header("Movement")]
     [SerializeField] bool xMove;
     [SerializeField] bool zMove;
+    
     [SerializeField] float minXValue = 1f;
     [SerializeField] float maxXValue = -1f;
     [SerializeField] float minZValue = 3f;

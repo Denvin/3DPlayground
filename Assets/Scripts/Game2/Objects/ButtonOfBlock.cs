@@ -9,7 +9,6 @@ public class ButtonOfBlock : MonoBehaviour
     
     public Action onPressed = delegate { };
     public Action onPressedRelease = delegate { };
-
     [SerializeField] float minYValue = -0.12f;
     [SerializeField] float maxYValue = 0f;
     [SerializeField] float moveTime = 1;
@@ -34,6 +33,7 @@ public class ButtonOfBlock : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         onPressed();
+        
         Sequence movementSequence = DOTween.Sequence();
         movementSequence.Append(transform.DOMoveY(minYValue, moveTime));
             

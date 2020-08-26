@@ -73,8 +73,10 @@ public class CubeMovement : MonoBehaviour
 
     public void MoveRight()
     {
+
         Vector3 newPosition = transform.position + Vector3.right;
         MoveTo(newPosition);
+        ResetInput();
     }
 
     public void MoveLeft()
